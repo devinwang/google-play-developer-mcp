@@ -24,7 +24,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().users.list(args);
+      const res = await (await publisher()).users.list(args);
       return res.data;
     },
   }),
@@ -39,7 +39,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async ({ parent, user }) => {
-      const res = await publisher().users.create({ parent, requestBody: user });
+      const res = await (await publisher()).users.create({ parent, requestBody: user });
       return res.data;
     },
   }),
@@ -54,7 +54,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async ({ name, user, updateMask }) => {
-      const res = await publisher().users.patch({
+      const res = await (await publisher()).users.patch({
         name,
         updateMask,
         requestBody: user,
@@ -71,7 +71,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async ({ name }) => {
-      await publisher().users.delete({ name });
+      await (await publisher()).users.delete({ name });
       return { ok: true };
     },
   }),
@@ -88,7 +88,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async ({ parent, grant }) => {
-      const res = await publisher().grants.create({ parent, requestBody: grant });
+      const res = await (await publisher()).grants.create({ parent, requestBody: grant });
       return res.data;
     },
   }),
@@ -103,7 +103,7 @@ export const userTools: Tool[] = [
       })
       .strict(),
     handler: async ({ name, grant, updateMask }) => {
-      const res = await publisher().grants.patch({
+      const res = await (await publisher()).grants.patch({
         name,
         updateMask,
         requestBody: grant,
@@ -116,7 +116,7 @@ export const userTools: Tool[] = [
     description: "Revoke a grant.",
     input: z.object({ name: z.string() }).strict(),
     handler: async ({ name }) => {
-      await publisher().grants.delete({ name });
+      await (await publisher()).grants.delete({ name });
       return { ok: true };
     },
   }),

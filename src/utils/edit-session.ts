@@ -12,7 +12,7 @@ export async function withEdit<T>(
   options: { commit?: boolean; changesNotSentForReview?: boolean } = {},
 ): Promise<T> {
   const { commit = true, changesNotSentForReview = false } = options;
-  const api = publisher();
+  const api = await publisher();
   const inserted = await api.edits.insert({ packageName, requestBody: {} });
   const editId = inserted.data.id;
   if (!editId) {

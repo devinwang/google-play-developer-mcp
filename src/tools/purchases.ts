@@ -24,7 +24,7 @@ export const purchaseTools: Tool[] = [
       .object({ packageName: packageNameArg, token: purchaseTokenArg })
       .strict(),
     handler: async ({ packageName, token }) => {
-      const res = await publisher().purchases.productsv2.getproductpurchasev2({
+      const res = await (await publisher()).purchases.productsv2.getproductpurchasev2({
         packageName,
         token,
       });
@@ -41,7 +41,7 @@ export const purchaseTools: Tool[] = [
       .object({ packageName: packageNameArg, token: purchaseTokenArg })
       .strict(),
     handler: async ({ packageName, token }) => {
-      const res = await publisher().purchases.subscriptionsv2.get({
+      const res = await (await publisher()).purchases.subscriptionsv2.get({
         packageName,
         token,
       });
@@ -63,7 +63,7 @@ export const purchaseTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, token, revocationContext }) => {
-      const res = await publisher().purchases.subscriptionsv2.revoke({
+      const res = await (await publisher()).purchases.subscriptionsv2.revoke({
         packageName,
         token,
         requestBody: revocationContext ? { revocationContext } : {},
@@ -86,7 +86,7 @@ export const purchaseTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, token, ...body }) => {
-      const res = await publisherAny().purchases.subscriptionsv2.cancel({
+      const res = await (await publisherAny()).purchases.subscriptionsv2.cancel({
         packageName,
         token,
         requestBody: body,
@@ -106,7 +106,7 @@ export const purchaseTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, token, deferralInfo }) => {
-      const res = await publisherAny().purchases.subscriptionsv2.defer({
+      const res = await (await publisherAny()).purchases.subscriptionsv2.defer({
         packageName,
         token,
         requestBody: { deferralInfo },
@@ -133,7 +133,7 @@ export const purchaseTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, subscriptionId, token, ...body }) => {
-      const res = await publisher().purchases.subscriptions.acknowledge({
+      const res = await (await publisher()).purchases.subscriptions.acknowledge({
         packageName,
         subscriptionId: subscriptionId ?? "-",
         token,
@@ -161,7 +161,7 @@ export const purchaseTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().purchases.voidedpurchases.list(args);
+      const res = await (await publisher()).purchases.voidedpurchases.list(args);
       return res.data;
     },
   }),

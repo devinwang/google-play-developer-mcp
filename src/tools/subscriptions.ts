@@ -24,7 +24,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.subscriptions.list(args);
+      const res = await (await publisher()).monetization.subscriptions.list(args);
       return res.data;
     },
   }),
@@ -35,7 +35,7 @@ export const subscriptionTools: Tool[] = [
       .object({ packageName: packageNameArg, productId: productIdArg })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.subscriptions.get(args);
+      const res = await (await publisher()).monetization.subscriptions.get(args);
       return res.data;
     },
   }),
@@ -51,7 +51,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, subscription, regionsVersion }) => {
-      const res = await publisherAny().monetization.subscriptions.create({
+      const res = await (await publisherAny()).monetization.subscriptions.create({
         packageName,
         productId,
         requestBody: subscription,
@@ -75,7 +75,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, subscription, ...rest }) => {
-      const res = await publisher().monetization.subscriptions.patch({
+      const res = await (await publisher()).monetization.subscriptions.patch({
         packageName,
         productId,
         requestBody: subscription,
@@ -95,7 +95,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      await publisher().monetization.subscriptions.delete(args);
+      await (await publisher()).monetization.subscriptions.delete(args);
       return { ok: true };
     },
   }),
@@ -107,7 +107,7 @@ export const subscriptionTools: Tool[] = [
       .object({ packageName: packageNameArg, productId: productIdArg })
       .strict(),
     handler: async ({ packageName, productId }) => {
-      const res = await publisher().monetization.subscriptions.archive({
+      const res = await (await publisher()).monetization.subscriptions.archive({
         packageName,
         productId,
         requestBody: {},
@@ -125,7 +125,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.subscriptions.batchGet(args);
+      const res = await (await publisher()).monetization.subscriptions.batchGet(args);
       return res.data;
     },
   }),
@@ -139,7 +139,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, requests }) => {
-      const res = await publisher().monetization.subscriptions.batchUpdate({
+      const res = await (await publisher()).monetization.subscriptions.batchUpdate({
         packageName,
         requestBody: { requests },
       });
@@ -159,7 +159,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.activate({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.activate({
         packageName,
         productId,
         basePlanId,
@@ -179,7 +179,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.deactivate({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.deactivate({
         packageName,
         productId,
         basePlanId,
@@ -199,7 +199,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      await publisher().monetization.subscriptions.basePlans.delete(args);
+      await (await publisher()).monetization.subscriptions.basePlans.delete(args);
       return { ok: true };
     },
   }),
@@ -217,7 +217,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, ...body }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.migratePrices({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.migratePrices({
         packageName,
         productId,
         basePlanId,
@@ -237,7 +237,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.batchMigratePrices({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.batchMigratePrices({
         packageName,
         productId,
         requestBody: { requests },
@@ -256,7 +256,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisherAny().monetization.subscriptions.basePlans.batchUpdate({
+      const res = await (await publisherAny()).monetization.subscriptions.basePlans.batchUpdate({
         packageName,
         productId,
         requestBody: { requests },
@@ -275,7 +275,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.batchUpdateStates({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.batchUpdateStates({
         packageName,
         productId,
         requestBody: { requests },
@@ -298,7 +298,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.list(args);
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.list(args);
       return res.data;
     },
   }),
@@ -314,7 +314,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.get(args);
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.get(args);
       return res.data;
     },
   }),
@@ -332,7 +332,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, offerId, offer, regionsVersion }) => {
-      const res = await publisherAny().monetization.subscriptions.basePlans.offers.create({
+      const res = await (await publisherAny()).monetization.subscriptions.basePlans.offers.create({
         packageName,
         productId,
         basePlanId,
@@ -360,7 +360,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, offerId, offer, ...rest }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.patch({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.patch({
         packageName,
         productId,
         basePlanId,
@@ -383,7 +383,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      await publisher().monetization.subscriptions.basePlans.offers.delete(args);
+      await (await publisher()).monetization.subscriptions.basePlans.offers.delete(args);
       return { ok: true };
     },
   }),
@@ -399,7 +399,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, offerId }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.activate({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.activate({
         packageName,
         productId,
         basePlanId,
@@ -421,7 +421,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, offerId }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.deactivate({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.deactivate({
         packageName,
         productId,
         basePlanId,
@@ -443,7 +443,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, requests }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.batchGet({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.batchGet({
         packageName,
         productId,
         basePlanId,
@@ -464,7 +464,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, requests }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.batchUpdate({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.batchUpdate({
         packageName,
         productId,
         basePlanId,
@@ -485,7 +485,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, basePlanId, requests }) => {
-      const res = await publisher().monetization.subscriptions.basePlans.offers.batchUpdateStates({
+      const res = await (await publisher()).monetization.subscriptions.basePlans.offers.batchUpdateStates({
         packageName,
         productId,
         basePlanId,
@@ -507,7 +507,7 @@ export const subscriptionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, price }) => {
-      const res = await publisher().monetization.convertRegionPrices({
+      const res = await (await publisher()).monetization.convertRegionPrices({
         packageName,
         requestBody: { price },
       });

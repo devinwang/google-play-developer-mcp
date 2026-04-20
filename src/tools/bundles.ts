@@ -16,7 +16,7 @@ export const bundleTools: Tool[] = [
     description: "List all AAB uploads in the current edit.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.bundles.list({ packageName, editId });
+      const res = await (await publisher()).edits.bundles.list({ packageName, editId });
       return res.data;
     },
   }),
@@ -35,7 +35,7 @@ export const bundleTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, editId, file, ...rest }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().edits.bundles.upload({
+      const res = await (await publisher()).edits.bundles.upload({
         packageName,
         editId,
         ackBundleInstallationWarning: rest.ackBundleInstallationWarning,
@@ -55,7 +55,7 @@ export const bundleTools: Tool[] = [
     description: "List all APK uploads in the edit.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.apks.list({ packageName, editId });
+      const res = await (await publisher()).edits.apks.list({ packageName, editId });
       return res.data;
     },
   }),
@@ -71,7 +71,7 @@ export const bundleTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, editId, file }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().edits.apks.upload({
+      const res = await (await publisher()).edits.apks.upload({
         packageName,
         editId,
         media: {
@@ -96,7 +96,7 @@ export const bundleTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, externallyHostedApk }) => {
-      const res = await publisher().edits.apks.addexternallyhosted({
+      const res = await (await publisher()).edits.apks.addexternallyhosted({
         packageName,
         editId,
         requestBody: { externallyHostedApk },
@@ -121,7 +121,7 @@ export const bundleTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, editId, apkVersionCode, deobfuscationFileType, file }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().edits.deobfuscationfiles.upload({
+      const res = await (await publisher()).edits.deobfuscationfiles.upload({
         packageName,
         editId,
         apkVersionCode,
@@ -148,7 +148,7 @@ export const bundleTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().edits.expansionfiles.get(args);
+      const res = await (await publisher()).edits.expansionfiles.get(args);
       return res.data;
     },
   }),
@@ -166,7 +166,7 @@ export const bundleTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, editId, apkVersionCode, expansionFileType, file }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().edits.expansionfiles.upload({
+      const res = await (await publisher()).edits.expansionfiles.upload({
         packageName,
         editId,
         apkVersionCode,
@@ -193,7 +193,7 @@ export const bundleTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, apkVersionCode, expansionFileType, ...body }) => {
-      const res = await publisher().edits.expansionfiles.update({
+      const res = await (await publisher()).edits.expansionfiles.update({
         packageName,
         editId,
         apkVersionCode,
@@ -217,7 +217,7 @@ export const bundleTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, apkVersionCode, expansionFileType, ...body }) => {
-      const res = await publisher().edits.expansionfiles.patch({
+      const res = await (await publisher()).edits.expansionfiles.patch({
         packageName,
         editId,
         apkVersionCode,

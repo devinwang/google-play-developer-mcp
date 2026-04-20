@@ -43,7 +43,7 @@ export const reportTools: Tool[] = [
         pageToken: z.string().optional(),
       })
       .strict(),
-    handler: async (args) => (await reporting().apps.search(args)).data,
+    handler: async (args) => (await (await reporting()).apps.search(args)).data,
   }),
   defineTool({
     name: "reports_apps_fetch_release_filter_options",
@@ -51,7 +51,7 @@ export const reportTools: Tool[] = [
       "List the release-filter dimensions available for an app (version codes, track, staged rollout).",
     input: z.object({ name: appNameArg }).strict(),
     handler: async (args) =>
-      (await reporting().apps.fetchReleaseFilterOptions(args)).data,
+      (await (await reporting()).apps.fetchReleaseFilterOptions(args)).data,
   }),
 
   // ---------- anomalies ----------
@@ -66,7 +66,7 @@ export const reportTools: Tool[] = [
         filter: z.string().optional(),
       })
       .strict(),
-    handler: async (args) => (await reporting().anomalies.list(args)).data,
+    handler: async (args) => (await (await reporting()).anomalies.list(args)).data,
   }),
 
   // ---------- vitals.crashrate ----------
@@ -78,7 +78,7 @@ export const reportTools: Tool[] = [
         name: z.string().describe("Format: apps/{packageName}/crashRateMetricSet"),
       })
       .strict(),
-    handler: async (args) => (await reporting().vitals.crashrate.get(args)).data,
+    handler: async (args) => (await (await reporting()).vitals.crashrate.get(args)).data,
   }),
   defineTool({
     name: "reports_crash_rate_query",
@@ -88,7 +88,7 @@ export const reportTools: Tool[] = [
     }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.crashrate.query({
+        await (await reporting()).vitals.crashrate.query({
           name,
           requestBody: body,
         })
@@ -100,7 +100,7 @@ export const reportTools: Tool[] = [
     name: "reports_anr_rate_get",
     description: "Get ANR-rate metric-set metadata.",
     input: z.object({ name: z.string() }).strict(),
-    handler: async (args) => (await reporting().vitals.anrrate.get(args)).data,
+    handler: async (args) => (await (await reporting()).vitals.anrrate.get(args)).data,
   }),
   defineTool({
     name: "reports_anr_rate_query",
@@ -108,7 +108,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.anrrate.query({
+        await (await reporting()).vitals.anrrate.query({
           name,
           requestBody: body,
         })
@@ -120,7 +120,7 @@ export const reportTools: Tool[] = [
     name: "reports_slow_start_rate_get",
     description: "Get slow-start-rate metadata.",
     input: z.object({ name: z.string() }).strict(),
-    handler: async (args) => (await reporting().vitals.slowstartrate.get(args)).data,
+    handler: async (args) => (await (await reporting()).vitals.slowstartrate.get(args)).data,
   }),
   defineTool({
     name: "reports_slow_start_rate_query",
@@ -128,7 +128,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.slowstartrate.query({
+        await (await reporting()).vitals.slowstartrate.query({
           name,
           requestBody: body,
         })
@@ -141,7 +141,7 @@ export const reportTools: Tool[] = [
     description: "Get slow-rendering-rate metadata.",
     input: z.object({ name: z.string() }).strict(),
     handler: async (args) =>
-      (await reporting().vitals.slowrenderingrate.get(args)).data,
+      (await (await reporting()).vitals.slowrenderingrate.get(args)).data,
   }),
   defineTool({
     name: "reports_slow_rendering_rate_query",
@@ -149,7 +149,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.slowrenderingrate.query({
+        await (await reporting()).vitals.slowrenderingrate.query({
           name,
           requestBody: body,
         })
@@ -162,7 +162,7 @@ export const reportTools: Tool[] = [
     description: "Get excessive-wake-up-rate metadata.",
     input: z.object({ name: z.string() }).strict(),
     handler: async (args) =>
-      (await reporting().vitals.excessivewakeuprate.get(args)).data,
+      (await (await reporting()).vitals.excessivewakeuprate.get(args)).data,
   }),
   defineTool({
     name: "reports_excessive_wakeup_rate_query",
@@ -170,7 +170,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.excessivewakeuprate.query({
+        await (await reporting()).vitals.excessivewakeuprate.query({
           name,
           requestBody: body,
         })
@@ -183,7 +183,7 @@ export const reportTools: Tool[] = [
     description: "Get stuck-background-wake-lock-rate metadata.",
     input: z.object({ name: z.string() }).strict(),
     handler: async (args) =>
-      (await reporting().vitals.stuckbackgroundwakelockrate.get(args)).data,
+      (await (await reporting()).vitals.stuckbackgroundwakelockrate.get(args)).data,
   }),
   defineTool({
     name: "reports_stuck_background_wake_lock_rate_query",
@@ -191,7 +191,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.stuckbackgroundwakelockrate.query({
+        await (await reporting()).vitals.stuckbackgroundwakelockrate.query({
           name,
           requestBody: body,
         })
@@ -203,7 +203,7 @@ export const reportTools: Tool[] = [
     name: "reports_lmk_rate_get",
     description: "Get Low-Memory-Killer (LMK) rate metadata.",
     input: z.object({ name: z.string() }).strict(),
-    handler: async (args) => (await reporting().vitals.lmkrate.get(args)).data,
+    handler: async (args) => (await (await reporting()).vitals.lmkrate.get(args)).data,
   }),
   defineTool({
     name: "reports_lmk_rate_query",
@@ -211,7 +211,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.lmkrate.query({
+        await (await reporting()).vitals.lmkrate.query({
           name,
           requestBody: body,
         })
@@ -224,7 +224,7 @@ export const reportTools: Tool[] = [
     description: "Get error-counts metric-set metadata.",
     input: z.object({ name: z.string() }).strict(),
     handler: async (args) =>
-      (await reporting().vitals.errors.counts.get(args)).data,
+      (await (await reporting()).vitals.errors.counts.get(args)).data,
   }),
   defineTool({
     name: "reports_errors_counts_query",
@@ -232,7 +232,7 @@ export const reportTools: Tool[] = [
     input: queryRequest.extend({ name: z.string() }),
     handler: async ({ name, ...body }) =>
       (
-        await reporting().vitals.errors.counts.query({
+        await (await reporting()).vitals.errors.counts.query({
           name,
           requestBody: body,
         })
@@ -251,7 +251,7 @@ export const reportTools: Tool[] = [
       })
       .strict(),
     handler: async (args) =>
-      (await reporting().vitals.errors.issues.search(args)).data,
+      (await (await reporting()).vitals.errors.issues.search(args)).data,
   }),
   defineTool({
     name: "reports_errors_reports_search",
@@ -266,6 +266,6 @@ export const reportTools: Tool[] = [
       })
       .strict(),
     handler: async (args) =>
-      (await reporting().vitals.errors.reports.search(args)).data,
+      (await (await reporting()).vitals.errors.reports.search(args)).data,
   }),
 ];

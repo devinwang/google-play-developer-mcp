@@ -22,7 +22,7 @@ export const reviewTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().reviews.list(args);
+      const res = await (await publisher()).reviews.list(args);
       return res.data;
     },
   }),
@@ -37,7 +37,7 @@ export const reviewTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().reviews.get(args);
+      const res = await (await publisher()).reviews.get(args);
       return res.data;
     },
   }),
@@ -52,7 +52,7 @@ export const reviewTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, reviewId, replyText }) => {
-      const res = await publisher().reviews.reply({
+      const res = await (await publisher()).reviews.reply({
         packageName,
         reviewId,
         requestBody: { replyText },

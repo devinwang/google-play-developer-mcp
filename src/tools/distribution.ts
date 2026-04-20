@@ -25,7 +25,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().applications.deviceTierConfigs.list(args);
+      const res = await (await publisher()).applications.deviceTierConfigs.list(args);
       return res.data;
     },
   }),
@@ -40,7 +40,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, deviceTierConfig, allowUnknownDevices }) => {
-      const res = await publisher().applications.deviceTierConfigs.create({
+      const res = await (await publisher()).applications.deviceTierConfigs.create({
         packageName,
         allowUnknownDevices,
         requestBody: deviceTierConfig,
@@ -58,7 +58,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().applications.deviceTierConfigs.get(args);
+      const res = await (await publisher()).applications.deviceTierConfigs.get(args);
       return res.data;
     },
   }),
@@ -74,7 +74,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().apprecovery.list(args);
+      const res = await (await publisher()).apprecovery.list(args);
       return res.data;
     },
   }),
@@ -88,7 +88,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, appRecoveryAction }) => {
-      const res = await publisher().apprecovery.create({
+      const res = await (await publisher()).apprecovery.create({
         packageName,
         requestBody: appRecoveryAction,
       });
@@ -105,7 +105,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, appRecoveryId }) => {
-      const res = await publisher().apprecovery.deploy({
+      const res = await (await publisher()).apprecovery.deploy({
         packageName,
         appRecoveryId,
         requestBody: {},
@@ -123,7 +123,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, appRecoveryId }) => {
-      const res = await publisher().apprecovery.cancel({
+      const res = await (await publisher()).apprecovery.cancel({
         packageName,
         appRecoveryId,
         requestBody: {},
@@ -142,7 +142,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, appRecoveryId, targetingUpdate }) => {
-      const res = await publisher().apprecovery.addTargeting({
+      const res = await (await publisher()).apprecovery.addTargeting({
         packageName,
         appRecoveryId,
         requestBody: targetingUpdate,
@@ -162,7 +162,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().generatedapks.list(args);
+      const res = await (await publisher()).generatedapks.list(args);
       return res.data;
     },
   }),
@@ -178,7 +178,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().generatedapks.download(args, {
+      const res = await (await publisher()).generatedapks.download(args, {
         responseType: "arraybuffer",
       });
       const buf = Buffer.from(res.data as ArrayBuffer);
@@ -197,7 +197,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().systemapks.variants.list(args);
+      const res = await (await publisher()).systemapks.variants.list(args);
       return res.data;
     },
   }),
@@ -212,7 +212,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, versionCode, variant }) => {
-      const res = await publisher().systemapks.variants.create({
+      const res = await (await publisher()).systemapks.variants.create({
         packageName,
         versionCode,
         requestBody: variant,
@@ -231,7 +231,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().systemapks.variants.get(args);
+      const res = await (await publisher()).systemapks.variants.get(args);
       return res.data;
     },
   }),
@@ -246,7 +246,7 @@ export const distributionTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().systemapks.variants.download(args, {
+      const res = await (await publisher()).systemapks.variants.download(args, {
         responseType: "arraybuffer",
       });
       const buf = Buffer.from(res.data as ArrayBuffer);
@@ -267,7 +267,7 @@ export const distributionTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, file }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().internalappsharingartifacts.uploadapk({
+      const res = await (await publisher()).internalappsharingartifacts.uploadapk({
         packageName,
         media: {
           mimeType: "application/vnd.android.package-archive",
@@ -288,7 +288,7 @@ export const distributionTools: Tool[] = [
       .strict(),
     handler: async ({ packageName, file }) => {
       if (!fs.existsSync(file)) throw new Error(`File not found: ${file}`);
-      const res = await publisher().internalappsharingartifacts.uploadbundle({
+      const res = await (await publisher()).internalappsharingartifacts.uploadbundle({
         packageName,
         media: {
           mimeType: "application/octet-stream",

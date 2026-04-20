@@ -54,7 +54,6 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "googleapis": "^171.4.0",
-    "google-auth-library": "^9.15.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

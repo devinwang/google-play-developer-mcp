@@ -14,7 +14,7 @@ export const listingTools: Tool[] = [
     description: "List every locale listing within an edit.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.listings.list({ packageName, editId });
+      const res = await (await publisher()).edits.listings.list({ packageName, editId });
       return res.data;
     },
   }),
@@ -26,7 +26,7 @@ export const listingTools: Tool[] = [
       .object({ packageName: packageNameArg, editId: editIdArg, language: languageArg })
       .strict(),
     handler: async ({ packageName, editId, language }) => {
-      const res = await publisher().edits.listings.get({
+      const res = await (await publisher()).edits.listings.get({
         packageName,
         editId,
         language,
@@ -51,7 +51,7 @@ export const listingTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, language, ...body }) => {
-      const res = await publisher().edits.listings.update({
+      const res = await (await publisher()).edits.listings.update({
         packageName,
         editId,
         language,
@@ -76,7 +76,7 @@ export const listingTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, language, ...body }) => {
-      const res = await publisher().edits.listings.patch({
+      const res = await (await publisher()).edits.listings.patch({
         packageName,
         editId,
         language,
@@ -93,7 +93,7 @@ export const listingTools: Tool[] = [
       .object({ packageName: packageNameArg, editId: editIdArg, language: languageArg })
       .strict(),
     handler: async ({ packageName, editId, language }) => {
-      await publisher().edits.listings.delete({ packageName, editId, language });
+      await (await publisher()).edits.listings.delete({ packageName, editId, language });
       return { ok: true };
     },
   }),
@@ -103,7 +103,7 @@ export const listingTools: Tool[] = [
     description: "Delete ALL locale listings in this edit. Irreversible within the edit.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      await publisher().edits.listings.deleteall({ packageName, editId });
+      await (await publisher()).edits.listings.deleteall({ packageName, editId });
       return { ok: true };
     },
   }),

@@ -34,7 +34,7 @@ export const imageTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, language, imageType }) => {
-      const res = await publisher().edits.images.list({
+      const res = await (await publisher()).edits.images.list({
         packageName,
         editId,
         language,
@@ -66,7 +66,7 @@ export const imageTools: Tool[] = [
           : ext === "jpg" || ext === "jpeg"
             ? "image/jpeg"
             : "application/octet-stream";
-      const res = await publisher().edits.images.upload({
+      const res = await (await publisher()).edits.images.upload({
         packageName,
         editId,
         language,
@@ -90,7 +90,7 @@ export const imageTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      await publisher().edits.images.delete(args);
+      await (await publisher()).edits.images.delete(args);
       return { ok: true };
     },
   }),
@@ -107,7 +107,7 @@ export const imageTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().edits.images.deleteall(args);
+      const res = await (await publisher()).edits.images.deleteall(args);
       return res.data;
     },
   }),

@@ -24,7 +24,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.onetimeproducts.list(args);
+      const res = await (await publisher()).monetization.onetimeproducts.list(args);
       return res.data;
     },
   }),
@@ -35,7 +35,7 @@ export const onetimeProductTools: Tool[] = [
       .object({ packageName: packageNameArg, productId: productIdArg })
       .strict(),
     handler: async (args) => {
-      const res = await publisher().monetization.onetimeproducts.get(args);
+      const res = await (await publisher()).monetization.onetimeproducts.get(args);
       return res.data;
     },
   }),
@@ -51,7 +51,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, product, regionsVersion }) => {
-      const res = await publisherAny().monetization.onetimeproducts.patch({
+      const res = await (await publisherAny()).monetization.onetimeproducts.patch({
         packageName,
         productId,
         requestBody: product,
@@ -76,7 +76,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, product, updateMask, regionsVersion, latencyTolerance }) => {
-      const res = await publisherAny().monetization.onetimeproducts.patch({
+      const res = await (await publisherAny()).monetization.onetimeproducts.patch({
         packageName,
         productId,
         updateMask,
@@ -98,7 +98,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      await publisher().monetization.onetimeproducts.delete(args);
+      await (await publisher()).monetization.onetimeproducts.delete(args);
       return { ok: true };
     },
   }),
@@ -112,7 +112,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productIds }) => {
-      const res = await publisher().monetization.onetimeproducts.batchGet({
+      const res = await (await publisher()).monetization.onetimeproducts.batchGet({
         packageName,
         productIds,
       });
@@ -131,7 +131,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.batchUpdate({
+      const res = await (await publisher()).monetization.onetimeproducts.batchUpdate({
         packageName,
         requestBody: { requests },
       });
@@ -148,7 +148,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.batchDelete({
+      const res = await (await publisher()).monetization.onetimeproducts.batchDelete({
         packageName,
         requestBody: { requests },
       });
@@ -168,7 +168,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisherAny().monetization.onetimeproducts.purchaseOptions.batchUpdate({
+      const res = await (await publisherAny()).monetization.onetimeproducts.purchaseOptions.batchUpdate({
         packageName,
         productId,
         requestBody: { requests },
@@ -187,7 +187,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.batchUpdateStates({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.batchUpdateStates({
         packageName,
         productId,
         requestBody: { requests },
@@ -206,7 +206,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.batchDelete({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.batchDelete({
         packageName,
         productId,
         requestBody: { requests },
@@ -230,7 +230,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, purchaseOptionId, pageSize, pageToken }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.offers.list({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.offers.list({
         packageName,
         productId,
         purchaseOptionId,
@@ -252,7 +252,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisherAny().monetization.onetimeproducts.purchaseOptions.offers.get(args);
+      const res = await (await publisherAny()).monetization.onetimeproducts.purchaseOptions.offers.get(args);
       return res.data;
     },
   }),
@@ -268,7 +268,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, purchaseOptionId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.offers.batchGet({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.offers.batchGet({
         packageName,
         productId,
         purchaseOptionId,
@@ -289,7 +289,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, purchaseOptionId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.offers.batchUpdate({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.offers.batchUpdate({
         packageName,
         productId,
         purchaseOptionId,
@@ -310,7 +310,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, purchaseOptionId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.offers.batchUpdateStates({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.offers.batchUpdateStates({
         packageName,
         productId,
         purchaseOptionId,
@@ -331,7 +331,7 @@ export const onetimeProductTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, productId, purchaseOptionId, requests }) => {
-      const res = await publisher().monetization.onetimeproducts.purchaseOptions.offers.batchDelete({
+      const res = await (await publisher()).monetization.onetimeproducts.purchaseOptions.offers.batchDelete({
         packageName,
         productId,
         purchaseOptionId,

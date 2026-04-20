@@ -33,7 +33,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisherAny().orders.list(args);
+      const res = await (await publisherAny()).orders.list(args);
       return res.data;
     },
   }),
@@ -44,7 +44,7 @@ export const orderTools: Tool[] = [
       .object({ packageName: packageNameArg, orderId: z.string() })
       .strict(),
     handler: async (args) => {
-      const res = await publisherAny().orders.get(args);
+      const res = await (await publisherAny()).orders.get(args);
       return res.data;
     },
   }),
@@ -58,7 +58,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await publisherAny().orders.batchGet(args);
+      const res = await (await publisherAny()).orders.batchGet(args);
       return res.data;
     },
   }),
@@ -74,7 +74,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, orderId, revoke }) => {
-      const res = await publisher().orders.refund({ packageName, orderId, revoke });
+      const res = await (await publisher()).orders.refund({ packageName, orderId, revoke });
       return res.data;
     },
   }),
@@ -90,7 +90,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async ({ parent, externalTransactionId }) => {
-      const res = await publisher().externaltransactions.getexternaltransaction({
+      const res = await (await publisher()).externaltransactions.getexternaltransaction({
         name: `${parent}/externalTransactions/${externalTransactionId}`,
       });
       return res.data;
@@ -107,7 +107,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async ({ parent, externalTransactionId, transaction }) => {
-      const res = await publisher().externaltransactions.createexternaltransaction({
+      const res = await (await publisher()).externaltransactions.createexternaltransaction({
         parent,
         externalTransactionId,
         requestBody: transaction,
@@ -126,7 +126,7 @@ export const orderTools: Tool[] = [
       })
       .strict(),
     handler: async ({ parent, externalTransactionId, refund }) => {
-      const res = await publisher().externaltransactions.refundexternaltransaction({
+      const res = await (await publisher()).externaltransactions.refundexternaltransaction({
         name: `${parent}/externalTransactions/${externalTransactionId}`,
         requestBody: refund,
       });

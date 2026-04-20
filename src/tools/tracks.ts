@@ -21,7 +21,7 @@ export const trackTools: Tool[] = [
     description: "List every track visible in this edit (includes default internal/alpha/beta/production + any custom closed-testing tracks).",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.tracks.list({ packageName, editId });
+      const res = await (await publisher()).edits.tracks.list({ packageName, editId });
       return res.data;
     },
   }),
@@ -32,7 +32,7 @@ export const trackTools: Tool[] = [
       .object({ packageName: packageNameArg, editId: editIdArg, track: trackArg })
       .strict(),
     handler: async ({ packageName, editId, track }) => {
-      const res = await publisher().edits.tracks.get({ packageName, editId, track });
+      const res = await (await publisher()).edits.tracks.get({ packageName, editId, track });
       return res.data;
     },
   }),
@@ -49,7 +49,7 @@ export const trackTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, track, releases }) => {
-      const res = await publisher().edits.tracks.update({
+      const res = await (await publisher()).edits.tracks.update({
         packageName,
         editId,
         track,
@@ -70,7 +70,7 @@ export const trackTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, track, releases }) => {
-      const res = await publisher().edits.tracks.patch({
+      const res = await (await publisher()).edits.tracks.patch({
         packageName,
         editId,
         track,
@@ -93,7 +93,7 @@ export const trackTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, ...body }) => {
-      const res = await publisher().edits.tracks.create({
+      const res = await (await publisher()).edits.tracks.create({
         packageName,
         editId,
         requestBody: body,
@@ -110,7 +110,7 @@ export const trackTools: Tool[] = [
       .object({ packageName: packageNameArg, editId: editIdArg, track: trackArg })
       .strict(),
     handler: async ({ packageName, editId, track }) => {
-      const res = await publisher().edits.testers.get({ packageName, editId, track });
+      const res = await (await publisher()).edits.testers.get({ packageName, editId, track });
       return res.data;
     },
   }),
@@ -126,7 +126,7 @@ export const trackTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, track, ...body }) => {
-      const res = await publisher().edits.testers.update({
+      const res = await (await publisher()).edits.testers.update({
         packageName,
         editId,
         track,
@@ -147,7 +147,7 @@ export const trackTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, track, ...body }) => {
-      const res = await publisher().edits.testers.patch({
+      const res = await (await publisher()).edits.testers.patch({
         packageName,
         editId,
         track,

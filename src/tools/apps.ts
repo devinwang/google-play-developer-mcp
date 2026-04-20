@@ -22,7 +22,7 @@ export const appsTools: Tool[] = [
       })
       .strict(),
     handler: async (args) => {
-      const res = await reporting().apps.search({
+      const res = await (await reporting()).apps.search({
         pageSize: args.pageSize,
         pageToken: args.pageToken,
       });
@@ -36,7 +36,7 @@ export const appsTools: Tool[] = [
       "Open a fresh edit and return the details resource (contact email/phone/website + default language) for one app.",
     input: z.object({ packageName: packageNameArg }).strict(),
     handler: async ({ packageName }) => {
-      const api = publisher();
+      const api = await publisher();
       const edit = await api.edits.insert({ packageName, requestBody: {} });
       try {
         const details = await api.edits.details.get({

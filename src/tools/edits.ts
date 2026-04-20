@@ -16,7 +16,7 @@ export const editTools: Tool[] = [
       "Open a new edit session for an app. Returns the edit id plus its expiry. Subsequent edits.* tool calls must pass this id.",
     input: z.object({ packageName: packageNameArg }).strict(),
     handler: async ({ packageName }) => {
-      const res = await publisher().edits.insert({ packageName, requestBody: {} });
+      const res = await (await publisher()).edits.insert({ packageName, requestBody: {} });
       return res.data;
     },
   }),
@@ -26,7 +26,7 @@ export const editTools: Tool[] = [
     description: "Fetch an existing edit — useful to check expiry before work.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.get({ packageName, editId });
+      const res = await (await publisher()).edits.get({ packageName, editId });
       return res.data;
     },
   }),
@@ -36,7 +36,7 @@ export const editTools: Tool[] = [
     description: "Validate an edit without committing. Catches schema/media errors before you publish.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.validate({ packageName, editId });
+      const res = await (await publisher()).edits.validate({ packageName, editId });
       return res.data;
     },
   }),
@@ -53,7 +53,7 @@ export const editTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, changesNotSentForReview }) => {
-      const res = await publisher().edits.commit({
+      const res = await (await publisher()).edits.commit({
         packageName,
         editId,
         changesNotSentForReview,
@@ -67,7 +67,7 @@ export const editTools: Tool[] = [
     description: "Abandon an edit. All pending changes are discarded.",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      await publisher().edits.delete({ packageName, editId });
+      await (await publisher()).edits.delete({ packageName, editId });
       return { ok: true };
     },
   }),
@@ -78,7 +78,7 @@ export const editTools: Tool[] = [
     description: "Get app-level details (contact email/phone/website + default language).",
     input: z.object({ packageName: packageNameArg, editId: editIdArg }).strict(),
     handler: async ({ packageName, editId }) => {
-      const res = await publisher().edits.details.get({ packageName, editId });
+      const res = await (await publisher()).edits.details.get({ packageName, editId });
       return res.data;
     },
   }),
@@ -96,7 +96,7 @@ export const editTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, ...body }) => {
-      const res = await publisher().edits.details.update({
+      const res = await (await publisher()).edits.details.update({
         packageName,
         editId,
         requestBody: body,
@@ -118,7 +118,7 @@ export const editTools: Tool[] = [
       })
       .strict(),
     handler: async ({ packageName, editId, ...body }) => {
-      const res = await publisher().edits.details.patch({
+      const res = await (await publisher()).edits.details.patch({
         packageName,
         editId,
         requestBody: body,
@@ -135,7 +135,7 @@ export const editTools: Tool[] = [
       .object({ packageName: packageNameArg, editId: editIdArg, track: z.string() })
       .strict(),
     handler: async ({ packageName, editId, track }) => {
-      const res = await publisher().edits.countryavailability.get({
+      const res = await (await publisher()).edits.countryavailability.get({
         packageName,
         editId,
         track,
