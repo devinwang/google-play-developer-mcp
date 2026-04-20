@@ -1,0 +1,64 @@
+{
+  "name": "google-play-developer-mcp",
+  "version": "0.1.0",
+  "description": "A complete MCP (Model Context Protocol) server for the Google Play Developer API — covers the full Android Publisher API v3 (edits, monetization, purchases v2, orders, reviews, users, app recovery) and the Play Developer Reporting API v1beta1 (crash/ANR/errors/anomalies). Lets AI assistants manage the entire Google Play Console lifecycle.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "google-play",
+    "google-play-console",
+    "google-play-developer-api",
+    "android-publisher",
+    "android",
+    "play-store",
+    "in-app-purchases",
+    "subscriptions",
+    "play-billing",
+    "claude",
+    "llm",
+    "ai"
+  ],
+  "homepage": "https://github.com/devinwang/google-play-developer-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devinwang/google-play-developer-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devinwang/google-play-developer-mcp/issues"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "google-play-developer-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "docs/"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "googleapis": "^171.4.0",
+    "google-auth-library": "^9.15.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

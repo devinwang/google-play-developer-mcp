@@ -1,0 +1,10 @@
+src/
+examples/
+tsconfig.json
+.gitignore
+.github/
+*.test.ts
+.env*
+*.json.key
+*service-account*.json
+credentials/
