@@ -9,6 +9,8 @@
 [![Reporting: v1beta1](https://img.shields.io/badge/Play%20Reporting-v1beta1-4285F4.svg)](https://developers.google.com/play/developer/reporting)
 [![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6.svg)](https://modelcontextprotocol.io/)
 
+**See also:** [`app-store-connect-mcp`](https://github.com/devinwang/app-store-connect-mcp) — the same philosophy for Apple's App Store Connect.
+
 ---
 
 ## Table of Contents
