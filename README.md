@@ -3,11 +3,16 @@
 > **The complete Model Context Protocol (MCP) server for Google Play.**
 > 150 tools. Full Android Publisher API v3 + Play Developer Reporting API v1beta1. No deprecated endpoints. Works with Claude, Cursor, VS Code Copilot, Gemini CLI, or any MCP client.
 
+[![npm version](https://img.shields.io/npm/v/google-play-developer-mcp.svg?color=cb3837&logo=npm)](https://www.npmjs.com/package/google-play-developer-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/google-play-developer-mcp.svg)](https://www.npmjs.com/package/google-play-developer-mcp)
+[![CI](https://github.com/devinwang/google-play-developer-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/devinwang/google-play-developer-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)](package.json)
+[![Tools: 150](https://img.shields.io/badge/tools-150-informational.svg)](#feature-matrix)
 [![API: v3](https://img.shields.io/badge/Android%20Publisher-v3-4285F4.svg)](https://developers.google.com/android-publisher/api-ref/rest)
 [![Reporting: v1beta1](https://img.shields.io/badge/Play%20Reporting-v1beta1-4285F4.svg)](https://developers.google.com/play/developer/reporting)
 [![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6.svg)](https://modelcontextprotocol.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6.svg)](tsconfig.json)
 
 **See also:** [`app-store-connect-mcp`](https://github.com/devinwang/app-store-connect-mcp) — the same philosophy for Apple's App Store Connect.
 
