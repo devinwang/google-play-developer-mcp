@@ -1,0 +1,50 @@
+# Smithery configuration — https://smithery.ai/docs
+#
+# This server is a local stdio MCP launched via `npx -y` against the
+# published npm package. Auth (Google Cloud service-account JSON key)
+# is registered inside the session via the `accounts_add` tool call,
+# so there are no env vars or user_config to prompt for.
+
+name: google-play-developer-mcp
+displayName: Google Play Developer MCP
+description: |
+  The complete MCP server for Google Play — 150 tools covering the full
+  Android Publisher API v3 (edits, store listings, monetization, in-app
+  purchases, subscriptions, reviews, orders, app recovery) and the Play
+  Developer Reporting API v1beta1 (crash, ANR, errors, anomalies).
+
+repository:
+  type: git
+  url: https://github.com/devinwang/google-play-developer-mcp
+
+homepage: https://github.com/devinwang/google-play-developer-mcp#readme
+documentation: https://github.com/devinwang/google-play-developer-mcp#readme
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+    required: []
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', 'google-play-developer-mcp']
+    })
+
+tags:
+  - google-play
+  - google-play-console
+  - android
+  - android-publisher
+  - play-billing
+  - in-app-purchases
+  - subscriptions
+  - monetization
+  - mcp
+  - mcp-server
+
+metadata:
+  author: Devin Wang
+  license: MIT
+  node_version: ">=18"
