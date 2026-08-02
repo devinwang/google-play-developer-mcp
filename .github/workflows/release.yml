@@ -17,11 +17,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Deliberately no `registry-url`: it makes setup-node write an .npmrc with
+      # `_authToken=${NODE_AUTH_TOKEN}` and, with no token supplied, export
+      # NODE_AUTH_TOKEN as the literal placeholder "XXXXX-XXXXX-XXXXX-XXXXX".
+      # npm then authenticates with that bogus token instead of falling through
+      # to OIDC, and the publish fails with a misleading 404 on PUT.
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: "npm"
-          registry-url: "https://registry.npmjs.org"
+
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 still bundles 10.x.
+      # Pinned to the 11.x line rather than @latest: releases should not ride on
+      # whatever major npm shipped that morning.
+      - name: Upgrade npm for trusted publishing
+        run: |
+          npm install -g "npm@^11.5.1"
+          npm --version
 
       - run: npm ci
 
@@ -37,10 +49,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
 
+      # Authenticates via OIDC against the trusted publisher configured on npm
+      # for this package (repo + this workflow file). No NPM_TOKEN: a long-lived
+      # token expires silently and npm answers an unauthorized publish with a
+      # confusing 404 on PUT. Provenance is automatic under trusted publishing.
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public --provenance
+        run: npm publish --access public
 
       - name: Extract release notes for this version
         run: |
