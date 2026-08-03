@@ -1,6 +1,6 @@
 {
   "name": "google-play-developer-mcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Complete Model Context Protocol (MCP) server for Google Play — 150 tools, full Android Publisher API v3 + Play Developer Reporting v1beta1. Edits, store listings, monetization, in-app purchases, subscriptions, reviews, orders, crash/ANR/error reporting. Works with Claude, Cursor, VS Code, Codex, Gemini CLI, Windsurf, or any MCP client.",
   "keywords": [
     "mcp",

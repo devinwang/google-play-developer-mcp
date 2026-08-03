@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] — 2026-08-03
+
+No behaviour change. Release-pipeline only.
+
+### Build / Release
+
+- **Publishes via npm trusted publishing (OIDC) instead of an `NPM_TOKEN` secret.** A long-lived token expires silently, and npm answers an unauthorized publish with `404 Not Found - PUT` — which reads like a missing package rather than an auth failure, so a release can look tagged and shipped while the registry never moved. OIDC has nothing to expire.
+- Dropped `registry-url` from `actions/setup-node`. It writes an `.npmrc` containing `_authToken=${NODE_AUTH_TOKEN}` and, with no token supplied, exports NODE_AUTH_TOKEN as the literal placeholder `XXXXX-XXXXX-XXXXX-XXXXX`; npm then authenticates with that bogus token instead of falling through to OIDC.
+- The release job upgrades npm to the `11.x` line before publishing — OIDC needs >= 11.5.1 and Node 22 still bundles 10.x. Pinned rather than `@latest` so a release never rides on whatever major npm shipped that morning.
+- Provenance is generated automatically under trusted publishing, so the explicit `--provenance` flag is gone. Attestation coverage is unchanged.
+
 ## [0.1.2] — 2026-04-26
 
 First version published to npm. Pre-publish polish only — no behaviour change beyond what 0.1.1 already shipped.
