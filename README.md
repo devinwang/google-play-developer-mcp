@@ -13,6 +13,7 @@
 [![Reporting: v1beta1](https://img.shields.io/badge/Play%20Reporting-v1beta1-4285F4.svg)](https://developers.google.com/play/developer/reporting)
 [![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6.svg)](https://modelcontextprotocol.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6.svg)](tsconfig.json)
+[![SafeSkill 93/100](https://img.shields.io/badge/SafeSkill-93%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/devinwang-google-play-developer-mcp)
 
 **See also:** [`app-store-connect-mcp`](https://github.com/devinwang/app-store-connect-mcp) — the same philosophy for Apple's App Store Connect.
 
