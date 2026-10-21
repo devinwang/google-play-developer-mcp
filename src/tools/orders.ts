@@ -79,6 +79,49 @@ export const orderTools: Tool[] = [
     },
   }),
 
+  defineTool({
+    name: "orders_review_refund",
+    description:
+      "Respond to a pending refund review (collaborative chargeback, 2026-07). Call within 24 hours of a PendingRefundReviewNotification. Supply `refundPreference` and optional usage evidence so Play can dispute the chargeback.",
+    input: z
+      .object({
+        packageName: packageNameArg,
+        orderId: z.string(),
+        pendingRefundToken: z
+          .string()
+          .describe("Token from the PendingRefundReviewNotification"),
+        refundPreference: z
+          .enum(["APPROVE", "DECLINE", "NEUTRAL"])
+          .describe("Whether Play should grant the refund"),
+        sampleContentProvided: z
+          .boolean()
+          .describe("Whether a free sample, trial, or functionality preview was offered before purchase"),
+        consumptionPercentageMilliunits: z
+          .number()
+          .int()
+          .min(0)
+          .max(100000)
+          .optional()
+          .describe("Share of the purchase consumed, in milliunits (45200 = 45.2%)"),
+        consumptionUsageEvents: z
+          .array(z.record(z.any()))
+          .max(1000)
+          .optional()
+          .describe(
+            "Usage events: { consumptionTime, ipAddress, location, consumptionItemDescription }",
+          ),
+      })
+      .strict(),
+    handler: async ({ packageName, orderId, ...requestBody }) => {
+      const res = await (await publisher()).orders.reviewrefund({
+        packageName,
+        orderId,
+        requestBody,
+      });
+      return res.data ?? { ok: true };
+    },
+  }),
+
   // ---------- externaltransactions ----------
   defineTool({
     name: "external_transactions_get",

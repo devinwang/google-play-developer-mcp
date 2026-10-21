@@ -8,7 +8,7 @@
 name: google-play-developer-mcp
 displayName: Google Play Developer MCP
 description: |
-  The complete MCP server for Google Play — 150 tools covering the full
+  The complete MCP server for Google Play — 157 tools covering the full
   Android Publisher API v3 (edits, store listings, monetization, in-app
   purchases, subscriptions, reviews, orders, app recovery) and the Play
   Developer Reporting API v1beta1 (crash, ANR, errors, anomalies).

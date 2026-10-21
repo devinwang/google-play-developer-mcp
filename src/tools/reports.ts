@@ -115,6 +115,50 @@ export const reportTools: Tool[] = [
       ).data,
   }),
 
+  // ---------- vitals.anonrssandswapmemoryusage ----------
+  defineTool({
+    name: "reports_anon_rss_swap_memory_get",
+    description:
+      "Get anonymous RSS + swap memory usage metric-set metadata. Format: apps/{packageName}/anonRssAndSwapMemoryUsageMetricSet",
+    input: z.object({ name: z.string() }).strict(),
+    handler: async (args) =>
+      (await (await reporting()).vitals.anonrssandswapmemoryusage.get(args)).data,
+  }),
+  defineTool({
+    name: "reports_anon_rss_swap_memory_query",
+    description: "Query anonymous RSS + swap memory usage timeline.",
+    input: queryRequest.extend({ name: z.string() }),
+    handler: async ({ name, ...body }) =>
+      (
+        await (await reporting()).vitals.anonrssandswapmemoryusage.query({
+          name,
+          requestBody: body,
+        })
+      ).data,
+  }),
+
+  // ---------- vitals.bitmapmemoryusage ----------
+  defineTool({
+    name: "reports_bitmap_memory_get",
+    description:
+      "Get bitmap memory usage metric-set metadata. Format: apps/{packageName}/bitmapMemoryUsageMetricSet",
+    input: z.object({ name: z.string() }).strict(),
+    handler: async (args) =>
+      (await (await reporting()).vitals.bitmapmemoryusage.get(args)).data,
+  }),
+  defineTool({
+    name: "reports_bitmap_memory_query",
+    description: "Query bitmap memory usage timeline.",
+    input: queryRequest.extend({ name: z.string() }),
+    handler: async ({ name, ...body }) =>
+      (
+        await (await reporting()).vitals.bitmapmemoryusage.query({
+          name,
+          requestBody: body,
+        })
+      ).data,
+  }),
+
   // ---------- vitals.slowstartrate ----------
   defineTool({
     name: "reports_slow_start_rate_get",

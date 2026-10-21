@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.devinwang/google-play-developer-mcp",
+  "description": "MCP server for Google Play: full Android Publisher API v3 and Play Developer Reporting API.",
+  "repository": {
+    "url": "https://github.com/devinwang/google-play-developer-mcp",
+    "source": "github"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "google-play-developer-mcp",
+      "version": "0.2.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
