@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] — 2026-10-21
+
+### Added
+
+- **`orders_review_refund`** — `orders.reviewrefund` (Google Play API, 2026-07-06). Responds to a pending refund review raised by the collaborative chargeback process, within the 24-hour window. Takes the `pendingRefundToken` from the `PendingRefundReviewNotification`, a `refundPreference` (`APPROVE` / `DECLINE` / `NEUTRAL`), `sampleContentProvided`, and optional consumption evidence.
+- **`purchases_products_acknowledge`** and **`purchases_products_consume`** — acknowledge and consume one-time product purchases. `purchases.productsv2` only exposes `get`, so these two still go through the (non-deprecated) v1 `purchases.products` resource.
+- **`reports_anon_rss_swap_memory_get` / `_query`** and **`reports_bitmap_memory_get` / `_query`** — the two Play Developer Reporting memory metric sets that were missing.
+
+### Changed
+
+- Upgraded `googleapis` from 171.4.0 to 187.0.0 (needed for `orders.reviewrefund` and the new Reporting metric sets). The SDK dropped the deprecated v1 `purchases.subscriptions.get/refund/revoke`; this server never used them.
+- Added `mcpName` to `package.json` and a `server.json` for the official MCP Registry.
+
 ## [0.1.3] — 2026-08-03
 
 No behaviour change. Release-pipeline only.

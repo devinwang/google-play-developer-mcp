@@ -1,14 +1,14 @@
 # google-play-developer-mcp
 
 > **The complete Model Context Protocol (MCP) server for Google Play.**
-> 150 tools. Full Android Publisher API v3 + Play Developer Reporting API v1beta1. No deprecated endpoints. Works with Claude, Cursor, VS Code Copilot, Gemini CLI, or any MCP client.
+> 157 tools. Full Android Publisher API v3 + Play Developer Reporting API v1beta1. No deprecated endpoints. Works with Claude, Cursor, VS Code Copilot, Gemini CLI, or any MCP client.
 
 [![npm version](https://img.shields.io/npm/v/google-play-developer-mcp.svg?color=cb3837&logo=npm)](https://www.npmjs.com/package/google-play-developer-mcp)
 [![npm downloads](https://img.shields.io/npm/dm/google-play-developer-mcp.svg)](https://www.npmjs.com/package/google-play-developer-mcp)
 [![CI](https://github.com/devinwang/google-play-developer-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/devinwang/google-play-developer-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-green.svg)](package.json)
-[![Tools: 150](https://img.shields.io/badge/tools-150-informational.svg)](#feature-matrix)
+[![Tools: 157](https://img.shields.io/badge/tools-157-informational.svg)](#feature-matrix)
 [![API: v3](https://img.shields.io/badge/Android%20Publisher-v3-4285F4.svg)](https://developers.google.com/android-publisher/api-ref/rest)
 [![Reporting: v1beta1](https://img.shields.io/badge/Play%20Reporting-v1beta1-4285F4.svg)](https://developers.google.com/play/developer/reporting)
 [![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6.svg)](https://modelcontextprotocol.io/)
@@ -58,7 +58,7 @@ If you drive Google Play Console with an AI assistant — release automation, re
 
 ## Feature matrix
 
-**150 tools across 30 groups. Every non-deprecated endpoint in both APIs.**
+**157 tools across 33 groups. Every non-deprecated endpoint in both APIs.**
 
 <details open>
 <summary><strong>Android Publisher API v3</strong></summary>
@@ -85,10 +85,11 @@ If you drive Google Play Console with an AI assistant — release automation, re
 | `subscription_offers_*` | 10 | Free trials / introductory prices. Create, update, delete, activate, deactivate + batch flavours |
 | `monetization_convert_region_prices` | 1 | Compute comparable region prices from one input price |
 | `purchases_products_v2_*` | 1 | Verify one-time-product purchases (supports multiple purchase options + offers) |
+| `purchases_products_*` | 2 | Acknowledge / consume one-time purchases (`productsv2` only exposes `get`) |
 | `purchases_subscriptions_v2_*` | 4 | Get, revoke, cancel, defer. Includes 2026 `OfferPhase`, `outOfAppPurchaseContext`, priceStepUp consent, item-based refund |
 | `purchases_subscriptions_acknowledge` | 1 | v1 acknowledge (retained — still the right call for acknowledging initial purchase) |
 | `purchases_voided_list` | 1 | Refund / chargeback feed |
-| `orders_*` | 4 | List, get, batch-get, refund (get + batch-get added 2025-05) |
+| `orders_*` | 5 | List, get, batch-get, refund, review refund (get + batch-get added 2025-05, `review_refund` added 2026-07 for collaborative chargebacks) |
 | `external_transactions_*` | 3 | Alternative Billing (Korea / EU) — get / create / refund |
 | `reviews_*` | 3 | List, get, reply |
 | `users_*` + `grants_*` | 7 | Team members & per-app grants |
@@ -114,6 +115,8 @@ If you drive Google Play Console with an AI assistant — release automation, re
 | `reports_excessive_wakeup_rate_*` | 2 | Battery — excessive wake-ups |
 | `reports_stuck_background_wake_lock_rate_*` | 2 | Battery — stuck wake locks |
 | `reports_lmk_rate_*` | 2 | Low-memory killer rate |
+| `reports_anon_rss_swap_memory_*` | 2 | Anonymous RSS + swap memory usage |
+| `reports_bitmap_memory_*` | 2 | Bitmap memory usage |
 | `reports_errors_counts_*` | 2 | Aggregate error counts |
 | `reports_errors_issues_search` | 1 | Grouped ErrorIssue search |
 | `reports_errors_reports_search` | 1 | Raw ErrorReport search |
@@ -446,6 +449,11 @@ PRs welcome. Before you submit:
 ---
 
 ## Version history
+
+### 0.2.0 — 2026-10-21
+
+- **157 MCP tools** (+7). New: `orders_review_refund`, `purchases_products_acknowledge`, `purchases_products_consume`, `reports_anon_rss_swap_memory_{get,query}`, `reports_bitmap_memory_{get,query}`.
+- Upgraded `googleapis` 171 → 187.
 
 ### 0.1.0 — 2026-04-20 (first public release)
 

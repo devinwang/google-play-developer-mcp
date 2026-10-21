@@ -32,6 +32,53 @@ export const purchaseTools: Tool[] = [
     },
   }),
 
+  // ---------- purchases.products (acknowledge / consume) ----------
+  // productsv2 only exposes `get`; acknowledging or consuming a one-time
+  // purchase still goes through the v1 products resource, which is not
+  // deprecated.
+  defineTool({
+    name: "purchases_products_acknowledge",
+    description:
+      "Acknowledge a one-time product purchase. Unacknowledged purchases are refunded by Play after 3 days.",
+    input: z
+      .object({
+        packageName: packageNameArg,
+        productId: productIdArg,
+        token: purchaseTokenArg,
+        developerPayload: z.string().optional(),
+      })
+      .strict(),
+    handler: async ({ packageName, productId, token, developerPayload }) => {
+      const res = await (await publisher()).purchases.products.acknowledge({
+        packageName,
+        productId,
+        token,
+        requestBody: { developerPayload },
+      });
+      return res.data ?? { ok: true };
+    },
+  }),
+  defineTool({
+    name: "purchases_products_consume",
+    description:
+      "Consume a consumable one-time product so the user can buy it again. Consuming also acknowledges the purchase.",
+    input: z
+      .object({
+        packageName: packageNameArg,
+        productId: productIdArg,
+        token: purchaseTokenArg,
+      })
+      .strict(),
+    handler: async ({ packageName, productId, token }) => {
+      const res = await (await publisher()).purchases.products.consume({
+        packageName,
+        productId,
+        token,
+      });
+      return res.data ?? { ok: true };
+    },
+  }),
+
   // ---------- purchases.subscriptionsv2 ----------
   defineTool({
     name: "purchases_subscriptions_v2_get",
